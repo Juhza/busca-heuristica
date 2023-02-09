@@ -2,20 +2,18 @@
 {
     public class Instancia
     {
+        private Relatorio _relatorio;
+
         public TipoDeBusca TipoDeBusca { get; private set; }
         public List<Maquina> Maquinas { get; private set; } = new List<Maquina>();
 
-        public Instancia(TipoDeBusca tipoDeBusca)
+        public Instancia(TipoDeBusca tipoDeBusca, int numeroDeMaquinas, int numeroDeTarefas, double? percentual = null)
         {
-            var quantidadeDeMaquinas = EscolheUmAleatorio(entrada: new[] { 10.0, 20.0, 50.0 });
-            var potencia = EscolheUmAleatorio(entrada: new[] { 1.5, 2.0 });
-            var quantidadeDeTarefas = Math.Round(Math.Pow(quantidadeDeMaquinas, potencia));
-
-            for (var i = 0; i < quantidadeDeMaquinas; i++)
+            for (var i = 0; i < numeroDeMaquinas; i++)
                 Maquinas.Add(new Maquina(numero: i + 1));
 
             var tarefas = new List<Tarefa>();
-            for (var i = 0; i < quantidadeDeTarefas; i++)
+            for (var i = 0; i < numeroDeTarefas; i++)
                 tarefas.Add(new Tarefa());
 
             if (tipoDeBusca == TipoDeBusca.MelhorMelhora)
@@ -23,15 +21,28 @@
 
             Maquinas.First().Tarefas.AddRange(tarefas);
             TipoDeBusca = tipoDeBusca;
+            _relatorio = new Relatorio(numeroDeMaquinas, numeroDeTarefas, percentual);
         }
 
-
-        public void ExecutaBuscaLocal()
+        public Instancia(int numeroDeMaquinas, int numeroDeTarefas, double percentual)
+            : this(TipoDeBusca.BLMRandomizada, numeroDeMaquinas, numeroDeTarefas, percentual)
         {
-            if (TipoDeBusca == TipoDeBusca.PrimeiraMelhora)
-                BuscaLocalPrimeiraMelhora();
-            else
-                BuscaLocalMelhorMelhora();
+            Percentual = percentual;
+        }
+
+        public string ExecutaBuscaLocal()
+        {
+            switch (tipo)
+            {
+                case TipoDeBusca.MelhorMelhora:
+                    BuscaLocalMelhorMelhora();
+                case TipoDeBusca.PrimeiraMelhora:
+                    BuscaLocalPrimeiraMelhora();
+                case TipoDeBusca.BLMRandomizada:
+                    BuscaLocalMonotonaRandomizada();
+            }
+
+            return _relatorio.FinalizarRelatorio();
         }
 
         private void BuscaLocalPrimeiraMelhora()
@@ -73,6 +84,11 @@
             }
         }
 
+        private void BuscaLocalMonotonaRandomizada()
+        {
+
+        }
+
         private double EscolheUmAleatorio(double[] entrada)
         {
             var indexAleatorio = new Random().Next(0, entrada.Length - 1);
@@ -91,6 +107,7 @@
 
         private void EscreveResultadoDoLoopAtual()
         {
+            _relatorio.QuantidadeDeIterações += 1;
             Console.WriteLine("[{0}]", string.Join(", ", Maquinas.Select(m => m.TempoDeExecucaoAtual)));
         }
     }

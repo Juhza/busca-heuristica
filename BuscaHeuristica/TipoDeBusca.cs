@@ -2,6 +2,6 @@
 {
     public enum TipoDeBusca
     {
-        PrimeiraMelhora, MelhorMelhora
+        PrimeiraMelhora, MelhorMelhora, BLMRandomizada
     }
 }
