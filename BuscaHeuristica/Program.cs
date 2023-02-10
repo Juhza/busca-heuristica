@@ -1,4 +1,5 @@
 ﻿using BuscaHeuristica;
+using System.Text;
 
 var relatorioFinal = new StringBuilder();
 var opcoesDeNumerosDeMaquinas = new[] { 10.0, 20.0, 50.0 };
@@ -17,12 +18,12 @@ foreach (var numeroDeMaquinas in opcoesDeNumerosDeMaquinas)
 
         var instancia = new Instancia(
             tipoDeBusca: TipoDeBusca.MelhorMelhora, 
-            numeroDeMaquinas: numeroDeMaquinas, 
-            numeroDeTarefas: numeroDeTarefas
+            numeroDeMaquinas: (int)numeroDeMaquinas, 
+            numeroDeTarefas: (int)numeroDeTarefas
         );
 
         var linhaDoRelatorio = instancia.ExecutaBuscaLocal();
-        relatorioFinal.AppendLine(linhaDoRelatorio); // verificar
+        relatorioFinal.AppendLine(linhaDoRelatorio);
 
         Console.WriteLine("\n\n");
     }
@@ -45,13 +46,13 @@ foreach (var numeroDeMaquinas in opcoesDeNumerosDeMaquinas)
             Console.WriteLine($"--> PERCENTUAL => {percentual}");
 
             var instancia = new Instancia(
-                numeroDeMaquinas: numeroDeMaquinas, 
-                numeroDeTarefas: numeroDeTarefas, 
+                numeroDeMaquinas: (int)numeroDeMaquinas, 
+                numeroDeTarefas: (int)numeroDeTarefas, 
                 percentual: percentual
             );
 
             var linhaDoRelatorio = instancia.ExecutaBuscaLocal();
-            relatorioFinal.AppendLine(linhaDoRelatorio); // verificar
+            relatorioFinal.AppendLine(linhaDoRelatorio);
 
             Console.WriteLine("\n\n");
         }

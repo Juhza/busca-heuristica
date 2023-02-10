@@ -8,7 +8,7 @@
         public int QuantidadeDeIterações { get; set; }
         public DateTime InicioDaExecucao { get; private set; }
 
-        public Relatorio(int numeroDeMaquinas, int numeroDeTarefas, double percentual)
+        public Relatorio(int numeroDeMaquinas, int numeroDeTarefas, double? percentual)
         {
             NumeroDeMaquinas = numeroDeMaquinas;
             NumeroDeTarefas = numeroDeTarefas;

@@ -27,19 +27,22 @@
         public Instancia(int numeroDeMaquinas, int numeroDeTarefas, double percentual)
             : this(TipoDeBusca.BLMRandomizada, numeroDeMaquinas, numeroDeTarefas, percentual)
         {
-            Percentual = percentual;
+        
         }
 
         public string ExecutaBuscaLocal()
         {
-            switch (tipo)
+            switch (TipoDeBusca)
             {
                 case TipoDeBusca.MelhorMelhora:
                     BuscaLocalMelhorMelhora();
+                    break;
                 case TipoDeBusca.PrimeiraMelhora:
                     BuscaLocalPrimeiraMelhora();
+                    break;
                 case TipoDeBusca.BLMRandomizada:
                     BuscaLocalMonotonaRandomizada();
+                    break;
             }
 
             return _relatorio.FinalizarRelatorio();
@@ -87,12 +90,6 @@
         private void BuscaLocalMonotonaRandomizada()
         {
 
-        }
-
-        private double EscolheUmAleatorio(double[] entrada)
-        {
-            var indexAleatorio = new Random().Next(0, entrada.Length - 1);
-            return entrada[indexAleatorio];
         }
 
         private Maquina MaquinaComMenorTempoDeExecucao()
