@@ -16,10 +16,10 @@
             InicioDaExecucao = DateTime.Now;
         }
 
-        public string FinalizarRelatorio()
+        public string FinalizaRelatorio()
         {
-            var tempoDeExecucao = (DateTime.Now - InicioDaExecucao).TotalSeconds; // verificar
-            return $"{NumeroDeMaquinas};{NumeroDeTarefas};{Percentual};{QuantidadeDeIterações};{tempoDeExecucao}";
+            var tempoDeExecucao = (DateTime.Now - InicioDaExecucao).TotalSeconds;
+            return $"{NumeroDeMaquinas};{NumeroDeTarefas};{Percentual};{QuantidadeDeIterações};{tempoDeExecucao.ToString("0.##")}";
         }
     }
 }
