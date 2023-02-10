@@ -18,7 +18,7 @@
 
         public string FinalizarRelatorio()
         {
-            var tempoDeExecucao = (DateTime.Now - InicioDaExecucao).Time; // verificar
+            var tempoDeExecucao = (DateTime.Now - InicioDaExecucao).TotalSeconds; // verificar
             return $"{NumeroDeMaquinas};{NumeroDeTarefas};{Percentual};{QuantidadeDeIterações};{tempoDeExecucao}";
         }
     }
