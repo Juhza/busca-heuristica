@@ -16,10 +16,10 @@
             InicioDaExecucao = DateTime.Now;
         }
 
-        public string FinalizaRelatorio()
+        public string FinalizaRelatorio(Maquina maquinaComMaiorTempoDeExecucao, Maquina maquinaComMenorTempoDeExecucao)
         {
             var tempoDeExecucao = (DateTime.Now - InicioDaExecucao).TotalSeconds;
-            return $"{NumeroDeMaquinas};{NumeroDeTarefas};{Percentual};{QuantidadeDeIterações};{tempoDeExecucao.ToString("0.##")}";
+            return $"{NumeroDeMaquinas};{NumeroDeTarefas};{Percentual};{QuantidadeDeIterações};{tempoDeExecucao.ToString("0.##")};{maquinaComMaiorTempoDeExecucao.TempoDeExecucaoAtual};{maquinaComMenorTempoDeExecucao.TempoDeExecucaoAtual}";
         }
     }
 }

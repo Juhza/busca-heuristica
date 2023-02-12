@@ -46,7 +46,7 @@
                     break;
             }
 
-            return _relatorio.FinalizaRelatorio();
+            return _relatorio.FinalizaRelatorio(MaquinaComMaiorTempoDeExecucao(), MaquinaComMenorTempoDeExecucao());
         }
 
         private void BuscaLocalPrimeiraMelhora()
