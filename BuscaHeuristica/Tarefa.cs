@@ -6,7 +6,7 @@
 
         public Tarefa()
         {
-            TempoDeExecucao = new Random().Next(1, 100);
+            TempoDeExecucao = new Random().Next(1, 101);
         }
     }
 }
