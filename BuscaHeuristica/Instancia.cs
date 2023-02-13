@@ -7,7 +7,7 @@
         private double? _probabilidade;
         private List<Maquina> _maquinas = new List<Maquina>();
 
-        public Instancia(TipoDeBusca tipoDeBusca, int numeroDeMaquinas, int numeroDeTarefas, double? probabilidade = null)
+        public Instancia(TipoDeBusca tipoDeBusca, int numeroDeMaquinas, int numeroDeTarefas, int expoente, double? probabilidade = null)
         {
             for (var i = 0; i < numeroDeMaquinas; i++)
                 _maquinas.Add(new Maquina(numero: i + 1));
@@ -22,13 +22,13 @@
             _maquinas.First().Tarefas.AddRange(tarefas);
             _tipoDeBusca = tipoDeBusca;
             _probabilidade = probabilidade;
-            _relatorio = new Relatorio(numeroDeMaquinas, numeroDeTarefas, probabilidade);
+            _relatorio = new Relatorio(numeroDeMaquinas, numeroDeTarefas, expoente, probabilidade);
         }
 
-        public Instancia(int numeroDeMaquinas, int numeroDeTarefas, double probabilidade)
-            : this(TipoDeBusca.BLMRandomizada, numeroDeMaquinas, numeroDeTarefas, probabilidade)
+        public Instancia(int numeroDeMaquinas, int numeroDeTarefas, int expoente, double probabilidade)
+            : this(TipoDeBusca.BLMRandomizada, numeroDeMaquinas, numeroDeTarefas, expoente, probabilidade)
         {
-        
+
         }
 
         public string ExecutaBuscaLocal()
@@ -46,7 +46,7 @@
                     break;
             }
 
-            return _relatorio.FinalizaRelatorio(MaquinaComMaiorTempoDeExecucao(), MaquinaComMenorTempoDeExecucao());
+            return _relatorio.FinalizaRelatorio(_tipoDeBusca, MaquinaComMaiorTempoDeExecucao());
         }
 
         private void BuscaLocalPrimeiraMelhora()
@@ -94,8 +94,8 @@
             {
                 var maquinaAtual = MaquinaComMaiorTempoDeExecucao();
                 var mudarParaVizinhoAleatorio = Math.Round((double)new Random().Next(1, 9) / 10, 1) <= _probabilidade;
-                var proximaMaquina = mudarParaVizinhoAleatorio 
-                    ? MaquinaAleatoria(maquinaAtual.Index) 
+                var proximaMaquina = mudarParaVizinhoAleatorio
+                    ? MaquinaAleatoria(maquinaAtual.Index)
                     : MaquinaComMenorTempoDeExecucao();
 
                 var encontrouBoaSolucao = (proximaMaquina.TempoDeExecucaoAtual + maquinaAtual.Tarefas.Last().TempoDeExecucao) >= maquinaAtual.TempoDeExecucaoAtual;

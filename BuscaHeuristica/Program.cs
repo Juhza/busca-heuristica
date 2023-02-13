@@ -17,9 +17,10 @@ foreach (var numeroDeMaquinas in opcoesDeNumerosDeMaquinas)
         Console.WriteLine($"----> QUANTIDADE DE TAREFAS => {numeroDeTarefas}");
 
         var instancia = new Instancia(
-            tipoDeBusca: TipoDeBusca.MelhorMelhora, 
-            numeroDeMaquinas: (int)numeroDeMaquinas, 
-            numeroDeTarefas: (int)numeroDeTarefas
+            tipoDeBusca: TipoDeBusca.MelhorMelhora,
+            numeroDeMaquinas: (int)numeroDeMaquinas,
+            numeroDeTarefas: (int)numeroDeTarefas,
+            expoente: (int)expoente
         );
 
         var linhaDoRelatorio = instancia.ExecutaBuscaLocal();
@@ -29,7 +30,6 @@ foreach (var numeroDeMaquinas in opcoesDeNumerosDeMaquinas)
     }
 }
 
-relatorioFinal.AppendLine("----");
 var probabilidades = new[] { 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9 };
 
 foreach (var numeroDeMaquinas in opcoesDeNumerosDeMaquinas)
@@ -46,8 +46,9 @@ foreach (var numeroDeMaquinas in opcoesDeNumerosDeMaquinas)
             Console.WriteLine($"--> PERCENTUAL => {probabilidade}");
 
             var instancia = new Instancia(
-                numeroDeMaquinas: (int)numeroDeMaquinas, 
-                numeroDeTarefas: (int)numeroDeTarefas, 
+                numeroDeMaquinas: (int)numeroDeMaquinas,
+                numeroDeTarefas: (int)numeroDeTarefas,
+                expoente: (int)expoente,
                 probabilidade: probabilidade
             );
 

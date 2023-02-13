@@ -4,22 +4,26 @@
     {
         public int NumeroDeMaquinas { get; private set; }
         public int NumeroDeTarefas { get; private set; }
+        public int Expoente { get; private set; }
         public double? Percentual { get; private set; }
         public int QuantidadeDeIterações { get; set; }
         public DateTime InicioDaExecucao { get; private set; }
 
-        public Relatorio(int numeroDeMaquinas, int numeroDeTarefas, double? percentual)
+        public Relatorio(int numeroDeMaquinas, int numeroDeTarefas, int expoente, double? percentual)
         {
             NumeroDeMaquinas = numeroDeMaquinas;
             NumeroDeTarefas = numeroDeTarefas;
+            Expoente = expoente;
             Percentual = percentual;
             InicioDaExecucao = DateTime.Now;
         }
 
-        public string FinalizaRelatorio(Maquina maquinaComMaiorTempoDeExecucao, Maquina maquinaComMenorTempoDeExecucao)
+        public string FinalizaRelatorio(TipoDeBusca tipoDeBusca, Maquina maquinaComMaiorTempoDeExecucao)
         {
             var tempoDeExecucao = (DateTime.Now - InicioDaExecucao).TotalSeconds;
-            return $"{NumeroDeMaquinas};{NumeroDeTarefas};{Percentual};{QuantidadeDeIterações};{tempoDeExecucao.ToString("0.##")};{maquinaComMaiorTempoDeExecucao.TempoDeExecucaoAtual};{maquinaComMenorTempoDeExecucao.TempoDeExecucaoAtual}";
+
+            // heuristica, n, m, replicacao, tempo, iteracoes, valor, parametro
+            return $"{tipoDeBusca.ToString()}; {NumeroDeTarefas}; {NumeroDeMaquinas}; {Expoente}; {tempoDeExecucao.ToString("0.#####")}; {QuantidadeDeIterações}; {maquinaComMaiorTempoDeExecucao.TempoDeExecucaoAtual}; {Percentual};";
         }
     }
 }
