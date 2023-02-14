@@ -124,7 +124,7 @@
         {
             var indexRandomizado = 0;
             do
-                indexRandomizado = new Random().Next(0, _maquinas.Count - 1);
+                indexRandomizado = new Random().Next(0, _maquinas.Count);
             while (indexRandomizado == maquinaAtual);
 
             return _maquinas.ElementAt(indexRandomizado);
