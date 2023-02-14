@@ -93,7 +93,7 @@
             while (true)
             {
                 var maquinaAtual = MaquinaComMaiorTempoDeExecucao();
-                var mudarParaVizinhoAleatorio = Math.Round((double)new Random().Next(1, 9) / 10, 1) <= _probabilidade;
+                var mudarParaVizinhoAleatorio = new Random().NextSingle() <= _probabilidade;
                 var proximaMaquina = mudarParaVizinhoAleatorio
                     ? MaquinaAleatoria(maquinaAtual.Index)
                     : MaquinaComMenorTempoDeExecucao();
