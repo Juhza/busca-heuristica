@@ -5,6 +5,9 @@ using System.Text;
 var relatorioFinal = new StringBuilder();
 var opcoesDeNumerosDeMaquinas = new[] { 10.0, 20.0, 50.0 };
 var expoentesDasTarefas = new[] { 1.5, 2.0 };
+var probabilidades = new[] { 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9 };
+
+relatorioFinal.AppendLine("heuristica, n, m, replicacao, tempo, iteracoes, valor, parametro");
 
 foreach (var numeroDeMaquinas in opcoesDeNumerosDeMaquinas)
 {
@@ -20,7 +23,7 @@ foreach (var numeroDeMaquinas in opcoesDeNumerosDeMaquinas)
             tipoDeBusca: TipoDeBusca.MelhorMelhora,
             numeroDeMaquinas: (int)numeroDeMaquinas,
             numeroDeTarefas: (int)numeroDeTarefas,
-            expoente: (int)expoente
+            expoente: (double)expoente
         );
 
         var linhaDoRelatorio = instancia.ExecutaBuscaLocal();
@@ -29,8 +32,6 @@ foreach (var numeroDeMaquinas in opcoesDeNumerosDeMaquinas)
         Console.WriteLine("\n\n");
     }
 }
-
-var probabilidades = new[] { 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9 };
 
 foreach (var numeroDeMaquinas in opcoesDeNumerosDeMaquinas)
 {
@@ -48,7 +49,7 @@ foreach (var numeroDeMaquinas in opcoesDeNumerosDeMaquinas)
             var instancia = new Instancia(
                 numeroDeMaquinas: (int)numeroDeMaquinas,
                 numeroDeTarefas: (int)numeroDeTarefas,
-                expoente: (int)expoente,
+                expoente: (double)expoente,
                 probabilidade: probabilidade
             );
 

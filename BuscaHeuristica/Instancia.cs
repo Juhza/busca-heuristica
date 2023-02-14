@@ -7,7 +7,7 @@
         private double? _probabilidade;
         private List<Maquina> _maquinas = new List<Maquina>();
 
-        public Instancia(TipoDeBusca tipoDeBusca, int numeroDeMaquinas, int numeroDeTarefas, int expoente, double? probabilidade = null)
+        public Instancia(TipoDeBusca tipoDeBusca, int numeroDeMaquinas, int numeroDeTarefas, double expoente, double? probabilidade = null)
         {
             for (var i = 0; i < numeroDeMaquinas; i++)
                 _maquinas.Add(new Maquina(numero: i + 1));
@@ -25,7 +25,7 @@
             _relatorio = new Relatorio(numeroDeMaquinas, numeroDeTarefas, expoente, probabilidade);
         }
 
-        public Instancia(int numeroDeMaquinas, int numeroDeTarefas, int expoente, double probabilidade)
+        public Instancia(int numeroDeMaquinas, int numeroDeTarefas, double expoente, double probabilidade)
             : this(TipoDeBusca.BLMRandomizada, numeroDeMaquinas, numeroDeTarefas, expoente, probabilidade)
         {
 
